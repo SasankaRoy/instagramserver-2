@@ -54,7 +54,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 
 // listen to yhe server on port ...
 
-app.listen(process.env.PORT || port, (err) => {
+app.listen(process.env.PORT || 5000, (err) => {
   if (err) console.log(err);
-  console.log(`server running on the port ${port}`);
+  console.log(`server running on the port `);
 });
