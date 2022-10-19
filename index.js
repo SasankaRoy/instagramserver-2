@@ -19,7 +19,7 @@ app.use("/image", express.static(path.join(__dirname, "public/images")));
 
 const User = require("./routes/user");
 const UserLogin = require("./routes/auth");
-const PostRoute = require("./routes/post");
+const PostRoute = require("./routes/Post");
 const Conversation = require("./routes/consersation");
 const Message = require("./routes/message");
 
