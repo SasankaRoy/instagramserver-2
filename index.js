@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const port = 5000;
 const multer = require("multer");
 const path = require("path");
-const Cookie = require("cookie-parser")
+const Cookie = require("cookie-parser");
 
 //env file
 dotenv.config();
@@ -20,8 +20,8 @@ app.use("/image", express.static(path.join(__dirname, "public/images")));
 const User = require("./routes/user");
 const UserLogin = require("./routes/auth");
 const PostRoute = require("./routes/post");
-const Conversation = require("./routes/consersation")
-const Message = require("./routes/message")
+const Conversation = require("./routes/consersation");
+const Message = require("./routes/message");
 
 //  MiddleWare...
 
@@ -34,6 +34,9 @@ app.use("/api/auth", UserLogin);
 app.use("/api/post", PostRoute);
 app.use("/api/conversation", Conversation);
 app.use("/api/message", Message);
+app.get("/", (req, res) => {
+  res.send("it is working bro yo");
+});
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
