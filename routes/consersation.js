@@ -4,6 +4,7 @@ const Conversation = require("../Database/schema/conversation");
 // new conversation...
 
 router.post("/", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   try {
     // const find = await Conversation.find({
     //   member: { $in: [req.body.receiverId] },
@@ -26,6 +27,7 @@ router.post("/", async (req, res) => {
 // get conversation of a user...
 
 router.get("/:userId", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   try {
     const conversation = await Conversation.find({
       member: { $in: [req.params.userId] },

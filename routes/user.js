@@ -6,6 +6,7 @@ const Crypto = require("crypto-js");
 // update user
 
 router.put("/:id", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   if (req.body.userid === req.params.id) {
     if (req.body.password) {
       try {
@@ -36,6 +37,7 @@ router.put("/:id", async (req, res) => {
 // get user
 
 router.get("/:id", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   try {
     const getUser = await User.findById(req.params.id);
     res.status(200).json(getUser);
@@ -44,6 +46,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 router.get("/:username/user", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   try {
     console.log(req.params.username);
     const getUser = await User.find({ userName: req.params.username });
@@ -56,6 +59,7 @@ router.get("/:username/user", async (req, res) => {
 // get friends
 
 router.get("/friend/:userId/following", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   try {
     const findUser = await User.findById(req.params.userId);
     let findFriends = await Promise.all(
@@ -77,6 +81,7 @@ router.get("/friend/:userId/following", async (req, res) => {
 });
 
 router.get("/friend/:userId/follower", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   try {
     const findUser = await User.findById(req.params.userId);
     let findFriends = await Promise.all(
@@ -99,6 +104,7 @@ router.get("/friend/:userId/follower", async (req, res) => {
 // follow user
 
 router.put("/:id/follow", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   try {
     if (req.body.userId === req.params.id)
       return res.status(404).json({ error: "you cannot follow yourself !!" });
@@ -128,6 +134,7 @@ router.put("/:id/follow", async (req, res) => {
 // unfollow user
 
 router.put("/:id/unfollow", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   try {
     let userIsUnFollowed = await User.findById(req.params.id);
     let userIsUnFollowing = await User.findById(req.body.userId);
@@ -152,6 +159,7 @@ router.put("/:id/unfollow", async (req, res) => {
 // delete user
 
 router.put("/:id/delete", async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   console.log(req.body.userid);
   if (req.body.userid === req.params.id) {
     try {
