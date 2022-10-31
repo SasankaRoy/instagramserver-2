@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const port = 5000;
+const CORS = require("cors");
 const multer = require("multer");
 const path = require("path");
 const Cookie = require("cookie-parser");
@@ -29,13 +30,18 @@ app.use(express.json());
 app.use(helmet());
 app.use(Cookie());
 app.use(morgan("common"));
+app.use(
+  CORS({
+    origin: "*",
+  })
+);
 app.use("/api/user", User);
 app.use("/api/auth", UserLogin);
 app.use("/api/post", PostRoute);
 app.use("/api/conversation", Conversation);
 app.use("/api/message", Message);
 app.get("/", (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header("Access-Control-Allow-Origin", "*");
   res.send("it is working bro yo");
 });
 
@@ -49,7 +55,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header("Access-Control-Allow-Origin", "*");
   try {
     return res.status(200).json("file uploaded successfully");
   } catch (error) {
