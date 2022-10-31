@@ -70,6 +70,10 @@ router.post("/login", Mware, async (req, res) => {
           );
           res.cookie("usertoken", token, {
             expires: new Date(Date.now() + 86400000),
+            httpOnly: true,
+            domain:"https://sasanka-insta2-0.netlify.app",
+            sameSite:'none',
+            secure: true
           });
           res.status(200).json({ findUser });
         }
