@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 // signin route
 
 router.post("/signin", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     const checkUser = await User.findOne({ email: req.body.email });
     if (checkUser) {
@@ -49,7 +49,7 @@ const Mware = async (req, res, next) => {
   }
 };
 router.post("/login", Mware, async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   if (req.user) {
     res.status(200).json({ findUser: req.user });
   } else {
@@ -88,7 +88,7 @@ router.post("/login", Mware, async (req, res) => {
 // logOut..
 
 router.get("/logout", (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   res.clearCookie("usertoken");
   res.status(200).json({ success: "success" });
 });

@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 // create a post ...
 
 router.post("/", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     const newPost = await new Post(req.body);
     let savePost = await newPost.save();
@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
 // update post ...
 
 router.put("/:id", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     let findPost = await Post.findById(req.params.id);
 
@@ -39,7 +39,7 @@ router.put("/:id", async (req, res) => {
 // likes the post ...
 
 router.put("/:id/like", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     let findPost = await Post.findById(req.params.id);
     if (findPost.likes.includes(req.body.userId)) {
@@ -58,7 +58,7 @@ router.put("/:id/like", async (req, res) => {
 // comment on a post
 
 router.put("/:id/comment", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   console.log(req.body);
   try {
     let findPost = await Post.findById(req.params.id);
@@ -73,7 +73,7 @@ router.put("/:id/comment", async (req, res) => {
 // get a post ...
 
 router.get("/:id", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     let findAPost = await Post.findById(req.params.id);
     if (findAPost) {
@@ -90,7 +90,7 @@ router.get("/:id", async (req, res) => {
 // get timeline post of user with his/her following users...
 
 router.get("/:id/timeline", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     let currUser = await User.findById(req.params.id);
     let findAllPost = await Post.find({ userId: req.params.id });
@@ -110,7 +110,7 @@ router.get("/:id/timeline", async (req, res) => {
 // get user's all post and userData too ...
 
 router.get("/:username/posts", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   const getUser = await User.findOne({ userName: req.params.username });
   const getUserAllPost = await Post.find({ userId: getUser._id });
 
@@ -120,7 +120,7 @@ router.get("/:username/posts", async (req, res) => {
 // delete post ...
 
 router.put("/:id/deletepost", async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   console.log(req.params.id, req.body.userId);
   try {
     let post = await Post.findById(req.params.id);

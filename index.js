@@ -35,7 +35,7 @@ app.use("/api/post", PostRoute);
 app.use("/api/conversation", Conversation);
 app.use("/api/message", Message);
 app.get("/", (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   res.send("it is working bro yo");
 });
 
@@ -49,7 +49,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     return res.status(200).json("file uploaded successfully");
   } catch (error) {

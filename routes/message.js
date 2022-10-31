@@ -3,7 +3,7 @@ const Message = require("../Database/schema/Messages");
 
 // save/add sms...
 router.post("/",async (req, res)=>{
-    res.set('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*');
     try {
         const newMessage = new Message(req.body);
 
@@ -19,7 +19,7 @@ router.post("/",async (req, res)=>{
 // get sms
 
 router.get('/:conversationId',async (req, res)=>{
-    res.set('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*');
     try {
         const messages = await Message.find({
             conversationId:req.params.conversationId,
