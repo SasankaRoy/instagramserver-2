@@ -74,6 +74,7 @@ router.post("/login", Mware, async (req, res) => {
             secure: true,
             domain: "sasanka-insta2-0.netlify.app",
             httpOnly: true,
+            
           });
           res.status(200).json({ findUser });
         }

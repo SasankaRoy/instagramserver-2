@@ -8,6 +8,7 @@ const CORS = require("cors");
 const multer = require("multer");
 const path = require("path");
 const Cookie = require("cookie-parser");
+const session = require("express-session");
 
 //env file
 dotenv.config();
@@ -28,13 +29,29 @@ const Message = require("./routes/message");
 
 app.use(express.json());
 app.use(helmet());
-app.use(Cookie());
+app.use(Cookie(
+  {
+    Credential: true
+  }
+));
 app.use(morgan("common"));
 app.use(
   CORS({
     origin: "*",
   })
 );
+// app.use(
+//   session({
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: process.env.MY_SECRETKEY,
+//     cookie: {
+//       sameSite: "none",
+//       maxAge: 86400000,
+//       secure: true,
+//     },
+//   })
+// );
 app.use("/api/user", User);
 app.use("/api/auth", UserLogin);
 app.use("/api/post", PostRoute);
