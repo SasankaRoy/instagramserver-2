@@ -33,7 +33,7 @@ app.use(Cookie({}));
 app.use(morgan("common"));
 app.use(
   CORS({
-    origin: "https://sasanka-insta2-0.netlify.app",
+    origin: "*",
     credentials: true,
   })
 );
@@ -55,10 +55,7 @@ app.use("/api/post", PostRoute);
 app.use("/api/conversation", Conversation);
 app.use("/api/message", Message);
 app.get("/", (req, res) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://sasanka-insta2-0.netlify.app"
-  );
+  res.header("Access-Control-Allow-Origin", "*");
   res.send("it is working bro yo");
 });
 
