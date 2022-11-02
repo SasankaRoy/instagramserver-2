@@ -37,20 +37,20 @@ app.use(
     credentials: true,
   })
 );
-app.use(
-  session({
-    resave: true,
-    saveUninitialized: false,
-    rolling: true,
-    store:'store',
-    secret: process.env.MY_SECRETKEY,
-    cookie: {
-      sameSite: "none",
-      maxAge: 86400000,
-      secure: true,
-    },
-  })
-);
+// app.use(
+//   session({
+//     resave: true,
+//     saveUninitialized: false,
+//     rolling: true,
+//     store:'store',
+//     secret: process.env.MY_SECRETKEY,
+//     cookie: {
+//       sameSite: "none",
+//       maxAge: 86400000,
+//       secure: true,
+//     },
+//   })
+// );
 app.use("/api/user", User);
 app.use("/api/auth", UserLogin);
 app.use("/api/post", PostRoute);
