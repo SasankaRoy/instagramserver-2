@@ -33,7 +33,7 @@ app.use(Cookie({}));
 app.use(morgan("common"));
 app.use(
   CORS({
-    origin: "*",
+    origin: "https://sasanka-insta2-0.netlify.app",
     credentials: true,
   })
 );
