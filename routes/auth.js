@@ -38,6 +38,7 @@ router.post("/signin", async (req, res) => {
 const Mware = async (req, res, next) => {
   if (req.cookies.usertoken) {
     let usertoken = req.cookies?.usertoken;
+    console.log("Usertoken", usertoken, "mware");
     let encode = jwt.verify(usertoken, process.env.MY_SECRETKEY);
     const findUser = await User.findById(encode._id);
     req.user = findUser;
@@ -70,11 +71,11 @@ router.post("/login", Mware, async (req, res) => {
           );
           res.cookie("usertoken", token, {
             expires: new Date(Date.now() + 86400000),
+            Credential: true,
             sameSite: "none",
             secure: true,
-            domain: "sasanka-insta2-0.netlify.app",
+            domain: ".sasanka-insta2-0.netlify.app",
             httpOnly: true,
-            
           });
           res.status(200).json({ findUser });
         }

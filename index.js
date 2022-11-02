@@ -29,11 +29,11 @@ const Message = require("./routes/message");
 
 app.use(express.json());
 app.use(helmet());
-app.use(Cookie(
-  {
-    Credential: true
-  }
-));
+app.use(
+  Cookie({
+    
+  })
+);
 app.use(morgan("common"));
 app.use(
   CORS({
