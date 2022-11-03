@@ -36,25 +36,31 @@ router.post("/signin", async (req, res) => {
 // Login route
 
 const Mware = async (req, res, next) => {
-  if (req.cookies.usertoken) {
-    let usertoken = req.cookies?.usertoken;
-    console.log("Usertoken", usertoken, "mware");
+  if (req.headers.cookie) {
+    let usertoken = req.headers.cookie?.split("=")[1];
+    console.log(req.headers.cookie?.split("=")[1], "mware");
     let encode = jwt.verify(usertoken, process.env.MY_SECRETKEY);
     const findUser = await User.findById(encode._id);
     req.user = findUser;
     // res.status(200).json({user:findUser});
-    console.log(encode._id, "cookies");
+    // console.log(encode._id, "cookies");
     next();
   } else {
     next();
   }
 };
 router.post("/login", Mware, async (req, res) => {
-  // res.header("Access-Control-Allow-Origin", "https://sasanka-insta2-0.netlify.app");
+  // res.header("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Origin", "https://sasanka-insta2-0.netlify.app");
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
   if (req.user) {
     res.status(200).json({ findUser: req.user });
   } else {
@@ -73,14 +79,15 @@ router.post("/login", Mware, async (req, res) => {
             { _id: findUser._id },
             process.env.MY_SECRETKEY
           );
-          res.cookie("usertoken", token, {
-            expires: new Date(Date.now() + 86400000),
-            Credential: true,
-            sameSite: "none",
-            secure: true,
-            domain: ".sasanka-insta2-0.netlify.app",
-            httpOnly: true,
-          });
+          // res.cookie("usertoken", token, {
+          //   expires: new Date(Date.now() + 86400000),
+          //   Credential: true,
+          //   sameSite: "none",
+          //   secure: true,
+          //   domain: ".sasanka-insta2-0.netlify.app",
+          //   httpOnly: true,
+          // });
+          res.set("Set-Cookie", `usertoken=${token}`);
           res.status(200).json({ findUser });
         }
       } else {
