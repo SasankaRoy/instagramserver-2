@@ -34,7 +34,7 @@ app.use(morgan("common"));
 app.use(
   CORS({
     // origin: "https://sasanka-insta2-0.netlify.app",
-    origin: "https://insta-2-0-8jo30vt91-sasankaroy033-gmailcom.vercel.app",
+    origin: "https://sasanka-insta-2-0.vercel.app",
     credentials: true,
   })
 );
