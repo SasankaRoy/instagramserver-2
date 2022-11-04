@@ -52,7 +52,7 @@ const Mware = async (req, res, next) => {
 router.post("/login", Mware, async (req, res) => {
   // res.header("Access-Control-Allow-Origin", "*");
   // res.setHeader("Access-Control-Allow-Origin", "https://sasanka-insta2-0.netlify.app");
-  res.setHeader("Access-Control-Allow-Origin", "https://insta-2-0-ruby.vercel.app");
+  res.setHeader("Access-Control-Allow-Origin", "https://insta-2-0-8jo30vt91-sasankaroy033-gmailcom.vercel.app");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
