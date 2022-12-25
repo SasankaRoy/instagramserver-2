@@ -79,8 +79,6 @@ router.post("/login", Mware, async (req, res) => {
           res.status(200).json({ findUser });
           res.cookie("name", "obito", {
             domain: "https://insta2-o.vercel.app",
-            secure: true,
-            sameSite: "none",
           });
           console.log(req.session, "from the router");
         }
