@@ -36,23 +36,18 @@ router.post("/signin", async (req, res) => {
 // Login route
 
 const Mware = async (req, res, next) => {
-  if (req.headers.cookie) {
-    let usertoken = req.headers.cookie?.split("=")[1];
-    console.log(req.headers.cookie?.split("=")[1], "mware");
-    let encode = jwt.verify(usertoken, process.env.MY_SECRETKEY);
-    const findUser = await User.findById(encode._id);
-    req.user = findUser;
-    // res.status(200).json({user:findUser});
-    // console.log(encode._id, "cookies");
+  if (req.session.usertoken) {
+    const decode = jwt.verify(req.session.usertoken, process.env.MY_SECRETKEY);
+    const user = await User.findById(decode._id);
+    console.log("from the middleWare", user);
+    req.findUser = user;
     next();
-  } else {
-    next();
-  }
+  } else next();
 };
 router.post("/login", Mware, async (req, res) => {
   // res.header("Access-Control-Allow-Origin", "*");
   // res.setHeader("Access-Control-Allow-Origin", "https://sasanka-insta2-0.netlify.app");
-  res.setHeader("Access-Control-Allow-Origin", "https://sasanka-insta-2-0.vercel.app");
+  // res.setHeader("Access-Control-Allow-Origin", "https://sasanka-insta-2-0.vercel.app");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -62,8 +57,8 @@ router.post("/login", Mware, async (req, res) => {
     "X-Requested-With,content-type"
   );
   res.setHeader("Access-Control-Allow-Credentials", true);
-  if (req.user) {
-    res.status(200).json({ findUser: req.user });
+  if (req.findUser) {
+    res.status(200).json({ findUser: req.findUser });
   } else {
     try {
       const findUser = await User.findOne({ email: req.body.email });
@@ -80,16 +75,9 @@ router.post("/login", Mware, async (req, res) => {
             { _id: findUser._id },
             process.env.MY_SECRETKEY
           );
-          // res.cookie("usertoken", token, {
-          //   expires: new Date(Date.now() + 86400000),
-          //   Credential: true,
-          //   sameSite: "none",
-          //   secure: true,
-          //   domain: ".sasanka-insta2-0.netlify.app",
-          //   httpOnly: true,
-          // });
-          res.set("Set-Cookie", `usertoken=${token}`);
+          req.session.usertoken = token;
           res.status(200).json({ findUser });
+          console.log(req.session, "from the router");
         }
       } else {
         res
@@ -107,7 +95,7 @@ router.post("/login", Mware, async (req, res) => {
 
 router.get("/logout", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.clearCookie("usertoken");
+  req.session.destroy();
   res.status(200).json({ success: "success" });
 });
 

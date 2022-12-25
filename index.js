@@ -9,6 +9,7 @@ const multer = require("multer");
 const path = require("path");
 const Cookie = require("cookie-parser");
 const session = require("express-session");
+const mongoSession = require("connect-mongodb-session")(session);
 
 //env file
 dotenv.config();
@@ -27,6 +28,24 @@ const Message = require("./routes/message");
 
 //  MiddleWare...
 
+const store = new mongoSession({
+  uri: process.env.MONGO_URL,
+  collection: "mySessions",
+});
+
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store,
+    maxAge: 86400000,
+    cookie: {
+      expires: new Date(Date.now() + 86400000),
+    },
+  })
+);
+
 app.use(express.json());
 app.use(helmet());
 app.use(Cookie());
@@ -34,24 +53,12 @@ app.use(morgan("common"));
 app.use(
   CORS({
     // origin: "https://sasanka-insta2-0.netlify.app",
-    origin: "https://sasanka-insta-2-0.vercel.app",
+    // origin: "https://sasanka-insta-2-0.vercel.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
-// app.use(
-//   session({
-//     resave: true,
-//     saveUninitialized: false,
-//     rolling: true,
-//     store:'store',
-//     secret: process.env.MY_SECRETKEY,
-//     cookie: {
-//       sameSite: "none",
-//       maxAge: 86400000,
-//       secure: true,
-//     },
-//   })
-// );
+
 app.use("/api/user", User);
 app.use("/api/auth", UserLogin);
 app.use("/api/post", PostRoute);
@@ -84,5 +91,5 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 
 app.listen(process.env.PORT || 5000, (err) => {
   if (err) console.log(err);
-  console.log(`server running on the port `);
+  console.log(`server running on the port${port} `);
 });
