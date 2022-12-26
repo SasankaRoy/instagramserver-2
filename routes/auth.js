@@ -59,6 +59,10 @@ router.post("/login", Mware, async (req, res) => {
     "X-Requested-With,content-type"
   );
   res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader(
+    "Set-Cookie",
+    "myCookie=hello; Expires=Wed, 21 Oct 2021 07:28:00 GMT;, otherCookie=world; Expires=Wed, 21 Oct 2021 07:28:00 GMT;"
+  );
   if (req.findUser) {
     res.status(200).json({ findUser: req.findUser });
   } else {
