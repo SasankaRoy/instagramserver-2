@@ -47,11 +47,12 @@ const Mware = async (req, res, next) => {
 router.post("/login", Mware, async (req, res) => {
   // res.header("Access-Control-Allow-Origin", "*");
   // res.setHeader("Access-Control-Allow-Origin", "https://sasanka-insta2-0.netlify.app");
-  // res.setHeader("Access-Control-Allow-Origin", "https://sasanka-insta-2-0.vercel.app");
+  res.setHeader("Access-Control-Allow-Origin", "https://insta2-o.vercel.app");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
   );
+
   res.setHeader(
     "Access-Control-Allow-Headers",
     "X-Requested-With,content-type"
@@ -77,12 +78,6 @@ router.post("/login", Mware, async (req, res) => {
           );
           req.session.usertoken = token;
           res.status(200).json({ findUser });
-          // res.cookie("name", token, {
-          //   domain: ".insta2-o.vercel.app",
-          //   maxAge: 1000 * 60 * 60 * 24,
-          //   secure: true,
-          //   httpOnly: true,
-          // });
         }
       } else {
         res
