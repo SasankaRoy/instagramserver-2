@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../Database/schema/User");
 const Crypto = require("crypto-js");
 const jwt = require("jsonwebtoken");
+// const path = require("path");
 
 // signin route
 
@@ -77,6 +78,10 @@ router.post("/login", Mware, async (req, res) => {
             process.env.MY_SECRETKEY
           );
           req.session.usertoken = token;
+          res.setHeader('Set-Cookie','_insta2'=token)
+          res.setHeader('Set-Cookie','Domain'='insta2-o.vercel.app')
+          res.setHeader('Set-Cookie','path'='/')
+          res.setHeader('Set-Cookie','Expires'='Wed')
           res.status(200).json({ findUser });
         }
       } else {
