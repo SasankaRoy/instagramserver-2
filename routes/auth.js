@@ -78,7 +78,13 @@ router.post("/login", Mware, async (req, res) => {
             process.env.MY_SECRETKEY
           );
           req.session.usertoken = token;
-
+          res.cookie("_instance", token, {
+            path: "/",
+            expires: new Date(Date.now() + 900000),
+            httpOnly: true,
+            domain: "insta2-o.vercel.app",
+            secure: true,
+          });
           res.status(200).json({ findUser });
         }
       } else {
