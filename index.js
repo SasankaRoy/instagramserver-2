@@ -46,7 +46,6 @@ app.use(
       domain: "https://insta2-o.vercel.app",
       secure: true,
       httpOnly: true,
-      path: "https://insta2-o.vercel.app",
     },
   })
 );
