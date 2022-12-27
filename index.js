@@ -58,8 +58,7 @@ app.use(morgan("common"));
 app.use(
   CORS({
     // origin: "https://sasanka-insta2-0.netlify.app",
-    // origin: "http://localhost:3000",
-    origin: "*",
+    origin: "https://insta2-o.vercel.app",
     withCredentials: true,
   })
 );
