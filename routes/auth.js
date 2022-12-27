@@ -82,7 +82,7 @@ router.post("/login", Mware, async (req, res) => {
             process.env.MY_SECRETKEY
           );
           req.session.usertoken = token;
-          res.set("Set-Cookie", `_insta=${req.session}`);
+          res.set("Set-Cookie");
           res.status(200).json({ findUser });
         }
       } else {
