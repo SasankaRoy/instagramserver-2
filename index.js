@@ -43,7 +43,7 @@ app.use(
     cookie: {
       // expires: new Date(Date.now() + 86400000),
       maxAge: 86400000,
-      domain: ".insta2-o.vercel.app",
+      domain: "insta2-o.vercel.app",
       secure: true,
       httpOnly: true,
       signed: true,
@@ -60,7 +60,6 @@ app.use(
     // origin: "https://sasanka-insta2-0.netlify.app",
     origin: "https://insta2-o.vercel.app",
     // origin: "http://localhost:3000",
-    credentials: true,
   })
 );
 
