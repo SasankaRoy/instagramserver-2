@@ -40,7 +40,6 @@ app.use(
     saveUninitialized: false,
     store,
     maxAge: 86400000,
-
     cookie: {
       // expires: new Date(Date.now() + 86400000),
       maxAge: 86400000,
