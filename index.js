@@ -63,6 +63,10 @@ app.use(
     withCredentials: true,
   })
 );
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://insta2-o.vercel.app");
+  next();
+});
 
 app.use("/api/user", User);
 app.use("/api/auth", UserLogin);
