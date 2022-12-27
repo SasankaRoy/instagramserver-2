@@ -47,8 +47,9 @@ const Mware = async (req, res, next) => {
 };
 router.post("/login", Mware, async (req, res) => {
   // res.header("Access-Control-Allow-Origin", "*");
-  // res.setHeader("Access-Control-Allow-Origin", "https://sasanka-insta2-0.netlify.app");
-  res.setHeader("Access-Control-Allow-Origin", "https://insta2-o.vercel.app/");
+
+  res.setHeader("Access-Control-Allow-Origin", "https://insta2-o.vercel.app");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -58,7 +59,6 @@ router.post("/login", Mware, async (req, res) => {
     "Access-Control-Allow-Headers",
     "X-Requested-With,content-type"
   );
-  res.setHeader("Access-Control-Allow-Credentials", true);
   // res.setHeader(
   //   "Set-Cookie",
   //   "myCookie=hello; Expires=Wed, 21 Oct 2021 07:28:00 GMT;, otherCookie=world; Expires=Wed, 21 Oct 2021 07:28:00 GMT;"
