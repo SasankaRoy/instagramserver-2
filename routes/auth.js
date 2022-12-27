@@ -58,10 +58,6 @@ router.post("/login", Mware, async (req, res) => {
     "Access-Control-Allow-Headers",
     "X-Requested-With,content-type"
   );
-  // res.set(
-  //   "Set-Cookie",
-  //   "myCookie=hello; Expires=Wed, 21 Oct 2021 07:28:00 GMT; domain=insta2-o.vercel.app"
-  // );
 
   if (req.findUser) {
     res.status(200).json({ findUser: req.findUser });

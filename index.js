@@ -43,7 +43,7 @@ app.use(
     cookie: {
       // expires: new Date(Date.now() + 86400000),
       maxAge: 86400000,
-      domain: "insta2-o.vercel.app",
+
       secure: true,
       httpOnly: true,
       signed: true,
