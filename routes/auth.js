@@ -59,10 +59,10 @@ router.post("/login", Mware, async (req, res) => {
     "X-Requested-With,content-type"
   );
   res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader(
-    "Set-Cookie",
-    "myCookie=hello; Expires=Wed, 21 Oct 2021 07:28:00 GMT;, otherCookie=world; Expires=Wed, 21 Oct 2021 07:28:00 GMT;"
-  );
+  // res.setHeader(
+  //   "Set-Cookie",
+  //   "myCookie=hello; Expires=Wed, 21 Oct 2021 07:28:00 GMT;, otherCookie=world; Expires=Wed, 21 Oct 2021 07:28:00 GMT;"
+  // );
   if (req.findUser) {
     res.status(200).json({ findUser: req.findUser });
   } else {
@@ -82,13 +82,7 @@ router.post("/login", Mware, async (req, res) => {
             process.env.MY_SECRETKEY
           );
           req.session.usertoken = token;
-          res.cookie("_instance", token, {
-            path: "/",
-            expires: new Date(Date.now() + 900000),
-            httpOnly: true,
-            domain: "insta2-o.vercel.app",
-            secure: true,
-          });
+          res.set("Set-Cookie", `_insta=${req.session}`);
           res.status(200).json({ findUser });
         }
       } else {
