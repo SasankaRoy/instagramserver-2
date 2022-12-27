@@ -46,9 +46,9 @@ const Mware = async (req, res, next) => {
   } else next();
 };
 router.post("/login", Mware, async (req, res) => {
-  // res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "*");
 
-  res.setHeader("Access-Control-Allow-Origin", "https://insta2-o.vercel.app");
+  // res.setHeader("Access-Control-Allow-Origin", "https://insta2-o.vercel.app");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -82,7 +82,10 @@ router.post("/login", Mware, async (req, res) => {
             process.env.MY_SECRETKEY
           );
           req.session.usertoken = token;
-          res.set("Set-Cookie");
+          res.set(
+            "Set-Cookie",
+            "myCookie=hello; Expires=Wed, 21 Oct 2021 07:28:00 GMT;"
+          );
           res.status(200).json({ findUser });
         }
       } else {
