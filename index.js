@@ -56,7 +56,6 @@ app.use(Cookie());
 app.use(morgan("common"));
 app.use(
   CORS({
-    // origin: "https://sasanka-insta2-0.netlify.app",
     origin: ["https://insta2-o.vercel.app", "http://localhost:3000"],
     withCredentials: true,
   })
