@@ -47,11 +47,11 @@ const Mware = async (req, res, next) => {
   } else next();
 };
 router.post("/login", Mware, async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Expose-Headers", "Content-Type, Content-Length");
-  res.header("Access-Control-Allow-Credentials", "true");
+  // res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  // res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  // res.header("Access-Control-Expose-Headers", "Content-Type, Content-Length");
+  // res.header("Access-Control-Allow-Credentials", "true");
 
   if (req.findUser) {
     res.status(200).json({ findUser: req.findUser });
