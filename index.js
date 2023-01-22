@@ -41,9 +41,8 @@ app.use(
     store,
     maxAge: 86400000,
     cookie: {
-      // expires: new Date(Date.now() + 86400000),
+      expires: new Date(Date.now() + 86400000),
       maxAge: 86400000,
-
       secure: true,
       httpOnly: true,
       signed: true,
@@ -58,7 +57,7 @@ app.use(morgan("common"));
 app.use(
   CORS({
     // origin: "https://sasanka-insta2-0.netlify.app",
-    origin: "https://insta2-o.vercel.app",
+    origin: ["https://insta2-o.vercel.app", "http://localhost:3000"],
     withCredentials: true,
   })
 );
